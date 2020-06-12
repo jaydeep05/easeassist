@@ -1,0 +1,173 @@
+html{overflow-x: hidden;}
+.header_links{
+    float: left;
+    padding: 1em;
+}
+.header{
+    /*padding: 1em;*/
+    box-shadow: 20px -10px 20px 5px;
+    margin: 0;
+}
+.header_cols:not(:first-child) {
+    padding: 0em 0em 0em 2em;
+    text-align: center;
+}
+.header_cols > .col-md-12 > img{
+    padding: 0.8em 0em 0em 0em;
+    width: 180px;
+}
+.header_links > a{
+    color: black;
+    text-decoration: none;
+}
+a.dashlink{
+    color:white;
+}
+a.dashlink:hover{
+    color: white!important;
+}
+.header_links > a:hover {
+    color: #3d72de;
+    text-decoration: underline;
+}
+.header_links_last {
+    background-color: #3d72de;
+    float: left;
+    padding: 1em;
+}
+.header_links_last:hover {
+    background-color: #de983d;
+}
+#project_list {
+    border-block-color: unset;
+}
+.hidden{
+    display: none;
+}
+.sb-sidenav-dark, .sb-sidenav-footer {
+    background-color: #3d71de!important;
+}
+.right{
+    float: right;
+}
+.reminders_olist {
+    list-style-type: none;
+}
+.reminders_list, .add_project {
+    background-color: #e9ecef;
+    padding: 1em;
+    float: left;
+    border-radius: 10px;
+    margin: 1em;
+}
+.reminders_list > a:hover{
+    text-decoration: none;
+}
+.add_project{
+    background-color: #e9ecef;
+    padding: .5em;
+    border-radius: 100%;
+    margin: 3.4em 1em;
+}
+.add_project > a{
+    padding: 5px;
+}
+.reminder_span {
+color: #7d7d7d;
+}
+.reminder_title span{
+    color: black;
+    font-weight: bold;
+}
+.reminder_detail p{
+    color: #7d7d7d;
+}
+.reminders_list > a{
+    color: black;
+}
+.reminders_list > a:hover{
+    text-decoration: none;
+    color: black;
+}
+.new_pro_nav{
+    padding: 1em;
+}
+.new_pro_btn{
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1em;
+    border: none;
+    border-radius: 10px;
+}
+.new_pro_btn:hover{
+    background-color: rgb(223, 226, 230);
+}
+.new_pro_btn > a {
+    text-decoration: none;
+    color: black;
+}
+.cards{
+    float: left;
+}
+.new-col{
+    padding: 1em;
+}
+
+
+.response{
+    list-style-type: none;
+  }
+  .response-list{
+    list-style-type: none;
+    border: 1px black solid;
+    border-radius: 5px;
+    margin: 1em;
+    padding: 1em 0.8em 0.5em 1em;
+  }
+  .response-input{
+    padding: 0.2em;
+  }
+  .bton{
+    background-color: orange;
+    padding: .5em 2em;
+    color: white;
+    border-radius: 5px;
+    border: 1px orange solid;
+    font-weight: bold;
+  }
+  .bton1{
+    font-weight: bold;
+    border: 1px orange solid;
+    border-radius: 5px;
+    padding: .5em 2em;
+    background-color: white;
+    color: orange;
+  }
+  .linput {
+    padding: 1em 10em  1em 0em;
+    margin: 0.7em 0em;
+}
+.mr-top{
+    margin-top: 1em;
+}
+.sideimg > img {
+
+    width: 100%;
+    position: absolute;
+    margin: 50% 10%;
+    z-index: -10;
+    right: 0;
+    height: 100%;
+}
+.label{
+
+}
+.center{
+    text-align: center;
+}
+.form-signin{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
