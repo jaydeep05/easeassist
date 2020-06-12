@@ -47,8 +47,6 @@ function raw_csv(){
 		return $qacsv;	
 	}
 	$conn->close();
-
-
 }
 function final_csv($filename){
 	$data = raw_csv();
