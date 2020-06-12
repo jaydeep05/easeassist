@@ -1,6 +1,6 @@
 <!-- //this is vraj at 10:41 -->
 <?php
-session_start();
+session();
 ?>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/mp3recorder.js"></script>
