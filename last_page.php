@@ -1,3 +1,10 @@
+<?php
+    session_start(); 
+    if(!isset($_SESSION['user_id'])){
+        echo "<script>window.location.href='login.php';</script>";
+        header("Location: logout.php");
+    }
+    //header('Access-Control-Allow-Origin: *'); ?>
 <head>
     <script src="js/recorder.js" type="text/javascript"></script>
     <style type="text/css">
@@ -24,18 +31,18 @@
             <pre id="log"></pre>
         </div>
         <div class="col-md-6 sideimg">
-            <form method="POST">
+            <!-- <form action="#" method="POST"> -->
                 <ol class="col-md-12 response">
                     <li class="">
                             <label class="label"><b>input Query</b> </label>
-                            <input type="text" name="user_input" class="linput" required>
+                            <input type="text" id="u_input" name="user_input" class="linput" required>
                             <!-- <input type="text" id="pro" name="project_name" class="linput" required> -->
                     </li>
                 </ol>
                 <br>
-                <button type="submit" name="submit" class="bton mr-top">CONFIRM</button>
-            </form>
-            <?php
+                <button id="confirm" type="submit" name="submit" class="bton mr-top">CONFIRM</button>
+            <!-- </form> -->
+            <?php /*
             if(isset($_POST['user_input']))
             {
                 $message=$_POST['user_input'];
@@ -54,8 +61,8 @@
                 $voice_UserInuput .= $audio_filepath;
                 $voice_UserInuput .='&qacsv'+$qacsv_file;
                 echo "<a href='".$voice_UserInuput."'><button>Voice submit</button></a>";
-            }
-            ?>
+            }*/
+            ?> 
         </div>
         <div class="col-md-6 ">
             <?php
@@ -82,11 +89,48 @@
     </div> 
 </div>
 <script>
-    function __log(e, data) {
-        log.innerHTML += "\n" + e + " " + (data || '');
-    }
     var audio_context;
     var recorder;
+    
+    $('#confirm').click(function(){
+        var res;
+        var inputQuery = $('#u_input').val();
+        console.log(inputQuery);
+        // $.post(
+        //     "http://localhost:8000/phpmessage", //?type=text&message="+inputQuery+"&qacsv=easeassist/files/testdata.csv",
+        //     {type:'text', message: inputQuery, qacsv: 'testdata.csv'},
+        //     // "jsonp",
+        //     function(response){
+        //         // alert(response.results)
+		// 		// console.log(response);				
+		// 		var instance = JSON.parse(response);
+        //         console.log(instance);
+        //         alert(instance);
+		// 	}
+        // )
+        fetch("http://localhost:8000/phpmessage", {
+            method: 'post',
+            mode: 'no-cors',
+            headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8","Accept": 'application/json'},
+            body: 'type=text&message='+inputQuery+'&qacsv=testdata.csv',
+            credentials: 'include'
+        })
+        .then(function (data) {
+            console.log('Request succeeded with JSON response', data);
+            res = data;
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
+
+        alert(JSON.stringify(res));
+
+    });
+    
+
+    function __log(e, data) {
+        log.innerHTML += "\n" + e + " " + (data || '');
+    }   
     function startUserMedia(stream) {
         var input = audio_context.createMediaStreamSource(stream);
         console.log('Media stream created.');
@@ -150,8 +194,6 @@
             li.appendChild(upload) //add the upload link to li
         });
     }
-
-    // window.onload = 
     function init() {
         try {
             // webkit shim
@@ -175,5 +217,3 @@
         
     };
 </script>
-    <!-- </body>
-</html> -->

@@ -5,5 +5,5 @@
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
-upload/
+upload/*
 .DS_Store
