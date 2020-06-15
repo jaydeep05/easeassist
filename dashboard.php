@@ -103,5 +103,20 @@ if(!$_SESSION['username'])
             $("#test").click(function(){$("#main").load("last_page.php");});
             $("#credentials").click(function(){$("#main").load("credentials.php");});
         </script>
+        <!-- <script>
+            $a=1; 
+            $b=2;
+            $(document).ready(function() {
+                setInterval(function() {
+                    <?php
+                    echo "console.log('".$_SESSION['username']."');";
+                        if($_SESSION['username']==""){
+                            
+                            header("Location: login.php");
+                        }
+                    ?>
+                }, 5000);
+            });
+        </script> -->
     </body>
 </html>

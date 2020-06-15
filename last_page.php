@@ -4,7 +4,7 @@
         echo "<script>window.location.href='login.php';</script>";
         header("Location: logout.php");
     }
-    //header('Access-Control-Allow-Origin: *'); ?>
+?>
 <head>
     <script src="js/recorder.js" type="text/javascript"></script>
     <style type="text/css">
@@ -31,60 +31,19 @@
             <pre id="log"></pre>
         </div>
         <div class="col-md-6 sideimg">
-            <!-- <form action="#" method="POST"> -->
                 <ol class="col-md-12 response">
                     <li class="">
                             <label class="label"><b>input Query</b> </label>
                             <input type="text" id="u_input" name="user_input" class="linput" required>
-                            <!-- <input type="text" id="pro" name="project_name" class="linput" required> -->
                     </li>
                 </ol>
                 <br>
                 <button id="confirm" type="submit" name="submit" class="bton mr-top">CONFIRM</button>
-            <!-- </form> -->
-            <?php /*
-            if(isset($_POST['user_input']))
-            {
-                $message=$_POST['user_input'];
-                $qacsv_file="testdata.csv";
-                $text_UserInuput = 'http://127.0.0.1:8000/phpmessage?type=text&message=';
-                $text_UserInuput .= $message;
-                $text_UserInuput .='&qacsv=';
-                $text_UserInuput .= $qacsv_file;
-                echo "<a href='".$text_UserInuput."'><button class=\"bton mr-top\">Send the Request submit</button></a>";
-            }
-            elseif(isset($_POST['voice_input']))
-            {
-                $audio_filepath = $_POST['voice_input'];
-                $qacsv_file="testdata.csv";
-                $voice_UserInuput = 'http://127.0.0.1:8000/phpmessage?type=voice&audio_path=';
-                $voice_UserInuput .= $audio_filepath;
-                $voice_UserInuput .='&qacsv'+$qacsv_file;
-                echo "<a href='".$voice_UserInuput."'><button>Voice submit</button></a>";
-            }*/
-            ?> 
         </div>
         <div class="col-md-6 ">
-            <?php
-            if(isset($_GET['val3']))
-            {   ?>
-                <fieldset>
-                <legend>Response</legend>
-                    <?php
-                        echo " ID : ",$_GET['val1'],"  Question : ",$_GET['val2'],"  Ans : ",$_GET['val3'];
-                        ?>
-                </fieldset>
-                <?php
-            }
-            elseif (isset($_GET['val1']))
-            {
-                echo $_GET['val1'];
-            }
-            else
-            {
-                echo " ⚠️ NOT ABLE TO CONNECT TO BACKEND⚠️","<br>"," 😞 TRY AGAIN LATER😞";
-            }
-            ?>
+            <div>
+                <ul id="textResponse"></ul>
+            </div>
         </div>
     </div> 
 </div>
@@ -96,35 +55,20 @@
         var res;
         var inputQuery = $('#u_input').val();
         console.log(inputQuery);
-        // $.post(
-        //     "http://localhost:8000/phpmessage", //?type=text&message="+inputQuery+"&qacsv=easeassist/files/testdata.csv",
-        //     {type:'text', message: inputQuery, qacsv: 'testdata.csv'},
-        //     // "jsonp",
-        //     function(response){
-        //         // alert(response.results)
-		// 		// console.log(response);				
-		// 		var instance = JSON.parse(response);
-        //         console.log(instance);
-        //         alert(instance);
-		// 	}
-        // )
-        fetch("http://localhost:8000/phpmessage", {
-            method: 'post',
-            mode: 'no-cors',
-            headers: {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8","Accept": 'application/json'},
-            body: 'type=text&message='+inputQuery+'&qacsv=testdata.csv',
-            credentials: 'include'
-        })
-        .then(function (data) {
-            console.log('Request succeeded with JSON response', data);
-            res = data;
-        })
-        .catch(function (error) {
-            console.log('Request failed', error);
-        });
-
-        alert(JSON.stringify(res));
-
+        $.post(
+            "http://localhost:8000/phpmessage", //?type=text&message="+inputQuery+"&qacsv=easeassist/files/testdata.csv",
+            {type:'text', message: inputQuery, qacsv: 'testdata.csv'},
+            function(response){
+                console.log(response);
+                // console.log(response.results.length);
+                var res = ['id','request','response'];
+                for( var i=0; i<response.results.length; i++){
+                    var li = document.createElement('li');
+                    li.innerHTML = res[i]+" : "+response.results[i];
+                    textResponse.appendChild(li);
+                }
+			}
+        );
     });
     
 
