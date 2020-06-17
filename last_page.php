@@ -124,6 +124,7 @@
             hf.innerHTML = hf.download;
             li.appendChild(au);
             recordingslist.appendChild(li);
+            var filename = new Date().toISOString();
             var upload = document.createElement('a');
             upload.href = "#";
             upload.innerHTML = "test";
