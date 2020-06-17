@@ -69,7 +69,7 @@
     </div>
   </div>
   <input type="hidden" id="uid" value="<?php echo $uid; ?>" name="">
-  <input type="text" id="pid" value="<?php if(isset($project)){ echo $project; } ?>" name="">
+  <input type="hidden" id="pid" value="<?php if(isset($project)){ echo $project; } ?>" name="">
   
 
   <!-- <img class="img" src='C:/Users/vrajm/Pictures/bg.png'> -->
