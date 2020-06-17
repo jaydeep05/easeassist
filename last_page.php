@@ -15,6 +15,12 @@
         background-position-x: 90%;
         background-position-y: 70%;
         }
+        #recordingslist {
+            list-style-type: none;
+        }
+        #textResponse {
+            list-style-type: decimal;
+        }
     </style>
 
 </head>
@@ -25,10 +31,7 @@
         <div class="col-md-6">
             <button id="testrecord" onclick="startRecording(this);"><i class="fa fa-microphone"></i></button>
             <button onclick="stopRecording(this);" disabled><i class="fa fa-microphone-slash"></i></button>
-            <h2>Recordings</h2>
-            <ul id="recordingslist"></ul>
-            <h2>Log</h2>
-            <pre id="log"></pre>
+            <div id="testRecording"></div>
         </div>
         <div class="col-md-6 sideimg">
                 <ol class="col-md-12 response">
@@ -40,37 +43,43 @@
                 <br>
                 <button id="confirm" type="submit" name="submit" class="bton mr-top">CONFIRM</button>
         </div>
-        <div class="col-md-6 ">
-            <div>
-                <ul id="textResponse"></ul>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Response</h2>
+            <ul id="textResponse"></ul>
         </div>
-    </div> 
+        <div class="col-md-6">                
+            <h2>Recordings</h2>
+            <ul id="recordingslist"></ul>
+            <h2>Log</h2>
+            <pre id="log"></pre>                
+        </div>
+    </div>
 </div>
 <script>
     var audio_context;
     var recorder;
-    
-    $('#confirm').click(function(){
-        var res;
-        var inputQuery = $('#u_input').val();
-        console.log(inputQuery);
-        $.post(
-            "http://localhost:8000/phpmessage", //?type=text&message="+inputQuery+"&qacsv=easeassist/files/testdata.csv",
-            {type:'text', message: inputQuery, qacsv: 'testdata.csv'},
-            function(response){
-                console.log(response);
-                // console.log(response.results.length);
-                var res = ['id','request','response'];
-                for( var i=0; i<response.results.length; i++){
-                    var li = document.createElement('li');
-                    li.innerHTML = res[i]+" : "+response.results[i];
-                    textResponse.appendChild(li);
+    $(document).ready(function(){
+        $('#confirm').click(function(){
+            var res;
+            var inputQuery = $('#u_input').val();
+            console.log(inputQuery);
+            $.post(
+                "http://localhost:8000/phpmessage", //?type=text&message="+inputQuery+"&qacsv=easeassist/files/testdata.csv",
+                {type:'text', message: inputQuery, qacsv: 'testdata.csv'},
+                function(response){
+                    console.log(response);
+                    var res = ['id','request','response'];
+                    for( var i=0; i<response.results.length; i++){
+                        var li = document.createElement('li');
+                        li.innerHTML = res[i]+" : "+response.results[i];
+                        textResponse.appendChild(li);
+                    }
                 }
-			}
-        );
+            );
+        });
     });
-    
 
     function __log(e, data) {
         log.innerHTML += "\n" + e + " " + (data || '');
@@ -114,11 +123,7 @@
             hf.download = new Date().toISOString() + '.wav';
             hf.innerHTML = hf.download;
             li.appendChild(au);
-            // li.appendChild(hf);
             recordingslist.appendChild(li);
-            var filename = new Date().toISOString();
-            //filename to send to server without extension 
-            //upload link 
             var upload = document.createElement('a');
             upload.href = "#";
             upload.innerHTML = "test";
@@ -133,20 +138,29 @@
                 fd.append("audio_data", blob, filename);
                 xhr.open("POST", "action/uploadWav.php", true);
                 xhr.send(fd);
+
+                $.post(
+                    "http://localhost:8000/phpmessage",
+                    {type:'voice', qacsv: 'testdata.csv'},
+                    function(response){
+                        console.log(response);
+                        var li = document.createElement('li');
+                        li.innerHTML = "text : "+response;
+                        textResponse.appendChild(li);                        
+                    }
+                );
+
             })
-            li.appendChild(document.createTextNode(" ")) //add a space in between 
-            li.appendChild(upload) //add the upload link to li
+            testRecording.appendChild(upload) //add the upload link to li
         });
     }
     function init() {
         try {
-            // webkit shim
             window.AudioContext = window.AudioContext || window.webkitAudioContext;
             navigator.getUserMedia = ( navigator.getUserMedia ||
                                         navigator.webkitGetUserMedia ||
                                         navigator.mozGetUserMedia ||
                                         navigator.msGetUserMedia);
-            // window.URL = window.URL || window.webkitURL;
 
             audio_context = new AudioContext;
             __log('Audio context set up.');
