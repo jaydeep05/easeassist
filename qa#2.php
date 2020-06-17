@@ -1,28 +1,28 @@
 <?php
 
-function storing_data(){
-	$conn = mysqli_connect('localhost', 'root', '', 'easeassist');
-	if(!$conn)
-		die("Please check your connection");
-	$i=0;
-	foreach ($_POST as $key => $value) 
-	{	
-		// echo $value."<br>";
-		if($i%2==0){
-			$q = $value;
-		}elseif(isset($q)){
-			$a = $value;
-			echo "q ".$q."<br>"."a ".$a."<br>";
-			$sql="INSERT INTO response (`question`,`answer`) VALUES('".$q."','".$a."')";
-			if(!$conn->query($sql)){
-				echo "Error: " . $sql . "<br>" . $conn->error;
-			}
+// function storing_data(){
+// 	$conn = mysqli_connect('localhost', 'root', '', 'easeassist');
+// 	if(!$conn)
+// 		die("Please check your connection");
+// 	$i=0;
+// 	foreach ($_POST as $key => $value) 
+// 	{	
+// 		// echo $value."<br>";
+// 		if($i%2==0){
+// 			$q = $value;
+// 		}elseif(isset($q)){
+// 			$a = $value;
+// 			echo "q ".$q."<br>"."a ".$a."<br>";
+// 			$sql="INSERT INTO response (`question`,`answer`) VALUES('".$q."','".$a."')";
+// 			if(!$conn->query($sql)){
+// 				echo "Error: " . $sql . "<br>" . $conn->error;
+// 			}
 			
-		}
-		$i=$i+1;
-	}
-	$conn->close();
-}
+// 		}
+// 		$i=$i+1;
+// 	}
+// 	$conn->close();
+// }
 function raw_csv(){
 	$conn = mysqli_connect('localhost', 'root', '', 'easeassist');
 	if(!$conn)
@@ -63,5 +63,3 @@ function final_csv($filename){
 }
 
 final_csv("newtestdata");
-
-storing_data();

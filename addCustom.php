@@ -75,10 +75,10 @@
 		var pid = $('#pid').val();
 		var str = 'q1='+q1+'&a1='+a1+'&uid='+uid+'&pid='+pid;
 		console.log(str);
-		if(q1!="" && q2!="" && ui)
+		// if(q1!="" && q2!="" && ui)
 		$.ajax({
             type: "POST",
-            url: "add_queries.php",
+            url: "action/add_queries.php",
             data: str,
             cache: false,
             success: function(result){
