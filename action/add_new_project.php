@@ -9,7 +9,7 @@
 	if(!$conn->query($sql)){
 		echo "Error ".$sql."<br>".$conn->error;
 	}else{
-		echo "<script>alert('sucess')</script>";
+		echo "<script>alert('success')</script>";
 	}
 
 	$conn->close();

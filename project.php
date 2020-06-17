@@ -16,7 +16,7 @@ $uid = $_SESSION['user_id'];
     <h2 class="mt-4">Start a New Project</h2><hr>
         <div class="row">
             <div class="col-md-12 sideimg">
-                <form id="project_detail" method="POST" action="#">
+                <!-- <form id="project_detail" method="POST" action="#"> -->
                     <ol class="col-md-12 response">
                         <li class="col-md-4 col-md-3 from-group">
                                 <label for="pro" class="label"><b>Project Name</b> </label>
@@ -36,11 +36,11 @@ $uid = $_SESSION['user_id'];
                         </li>
                         <li class="col-md-4 col-md-3 from-group">
                                 <input id="uid" type="hidden" name="uid" value="<?php echo $uid; ?>">
-                                <input id="submit" type="submit" name="pro_submit" value="Get Started" class="bton mr-top">
+                                <button id="submit" name="pro_submit" class="bton mr-top">Get Started</button>
                                 <button name="Back" class="bton1" type="button">Back</button>
                         </li>
                     </ol>
-                </form>                
+                <!-- </form>                 -->
             </div>
         </div> 
 </div>
@@ -63,7 +63,7 @@ $uid = $_SESSION['user_id'];
             {
                 $.ajax({
                     type: "POST",
-                    url: "add_new_project.php",
+                    url: "action/add_new_project.php",
                     data: dataString,
                     cache: false,
                     success: function(result){
