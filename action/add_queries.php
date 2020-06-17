@@ -48,7 +48,7 @@
 			fclose($fp); 	
 		}
 		
-		final_csv("newtestdata");
+		final_csv("testdata");
 		
 	}
 $conn->close();
