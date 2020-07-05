@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1 class="mt-4">Choose Response Type</h1><hr>
+  <h1 class="mt-4">Add Queries & Response</h1><hr>
   <?php
   	session_start();
   	print_r($_SESSION); 

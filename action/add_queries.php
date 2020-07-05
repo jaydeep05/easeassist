@@ -14,7 +14,7 @@
 			if(!$conn)
 				die("Please check your connection");
 			#array->csv
-			$sql="SELECT id,ques,replys from queries";
+			$sql="SELECT `id`,`ques`,`replys` from `queries`";
 			if(!$conn->query($sql))
 			{
 				echo "Error: " . $sql . "<br>" . $conn->error;
@@ -23,10 +23,9 @@
 			$qacsv = array();
 			if ($result->num_rows > 0)
 			{
-				$j=0;
 				while($row = $result->fetch_assoc())
 				{
-					echo $row['id'],$row['ques'],$row['replys'];
+					echo "<script>console.log('".$row['id'],$row['ques'],$row['replys']."');";
 					echo "<br>";
 					$qacsv[] = array($row['id'],$row['ques'],$row['replys']);
 				}
